@@ -16,7 +16,7 @@ const YouTubeForm = () => {
             errors.email="Required"
         }
         if(!values.channel){
-            errors.email="Required"
+            errors.channel="Required"
         }
 
         return errors
@@ -31,11 +31,13 @@ const YouTubeForm = () => {
     onSubmit:onSubmit,
     validate:validate
   });
-  console.log(formik.values);
+  console.log(formik.touched,"visited fields");
 
   return (
     <div>
       <form onSubmit={formik.handleSubmit} action="">
+        <div>
+
         <label htmlFor="name">Name</label>
         <input
           type="text"
@@ -45,6 +47,9 @@ const YouTubeForm = () => {
           value={formik.values.name}
           onBlur={formik.handleBlur}
         />
+{(formik.touched.name && formik.errors.name )&& <p className="error">{formik.errors.name}</p>}
+        </div>
+        <div>
 
         <label htmlFor="email">Email</label>
         <input
@@ -55,6 +60,9 @@ const YouTubeForm = () => {
           value={formik.values.email}
           onBlur={formik.handleBlur}
         />
+{(formik.touched.email && formik.errors.email ) && <p className="error">{formik.errors.email}</p>}
+        </div>
+        <div>
 
         <label htmlFor="channel">Channel</label>
         <input
@@ -65,6 +73,9 @@ const YouTubeForm = () => {
           value={formik.values.channel}
           onBlur={formik.handleBlur}
         />
+        {(formik.touched.channel && formik.errors.channel ) && <p className="error">{formik.errors.channel}</p>}
+        </div>
+
         <button type="submit">Submit</button>
       </form>
     </div>
